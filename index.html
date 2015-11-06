@@ -1,0 +1,109 @@
+<html lang="en" ng-app="StarterApp">
+
+<head>
+    <title>Negozi</title>
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.css">
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <link rel="stylesheet" href="styles/app.css" />
+</head>
+
+<body layout="column" ng-controller="AppController as vm">
+
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="vm.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+                <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg">
+                </md-icon>
+            </md-button>
+            <h1>Shops Application</h1>
+        </div>
+    </md-toolbar>
+
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="one">
+                    <md-content>
+                        <div class="row" style="margin-top:10px; margin-left:10px">
+                            <input id="focusedInput" type="text" placeholder="Input Latitude" size="17"/>
+                            <input id="focusedInput" type="text" placeholder="Input Longitude" size="17" />
+                            <md-button class="md-raised md-primary">
+                                GPS
+                                <!--fetch coordinates HERE-->
+                            </md-button>
+                            <md-button class="md-raised md-primary">
+                                Submit
+                            </md-button>
+                        </div>
+
+                        <div style="margin-left:20px">
+                            <img src="assets/large.jpg" style="margin-top:10px">
+                        </div>
+
+                        <div style ="margin-top:10px; margin-left:145px">
+                            <md-button class="md-raised md-primary">
+                                Take Picture
+                            </md-button>
+
+                            <md-button class="md-raised md-primary">
+                                Upload Picture
+                            </md-button>
+                        </div>
+
+                        <div style="margin-top:10px; margin-left:20px">
+                            <input id="focusedInput" type="text" placeholder="Input shop name" size="35" />
+                        </div>
+
+                        <div style="margin-top:10px; margin-left:20px">
+                            <input id="focusedInput" type="text" placeholder="Input shop address" size="35" />
+                        </div>
+                        
+                        <div style="margin-top:10px; margin-left:20px">
+                            <input id="focusedInput" type="text" placeholder="Input ethnicity of ownership" size="35" />
+                        </div>
+
+                        <div style="margin-top:10px; margin-left:20px">
+                            Select shop type
+                            <md-radio-group>
+                                <md-radio-button value="Tourist">Tourist</md-radio-button>
+                                <md-radio-button value="Resident">Resident</md-radio-button>
+                                <md-radio-button value="Mixed">Mixed</md-radio-button>
+                            </md-radio-group>
+                        </div>
+
+                        <div style="margin-top:10px; margin-left:20px">
+                            Plateatici
+                            <md-radio-group>
+                                <md-radio-button value="Yes">Yes</md-radio-button>
+                                <md-radio-button value="No">No</md-radio-button>
+                            </md-radio-group>
+                        </div>
+
+                    </md-content>
+                </md-tab>
+
+
+
+                <md-tab label="two">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Tab Two</h1>
+                    </md-content>
+                </md-tab>
+                <md-tab label="three">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Tab Three</h1>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+
+</body>
+
+</html>
