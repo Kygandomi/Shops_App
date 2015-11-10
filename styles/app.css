@@ -15,3 +15,11 @@ md-radio-button {
 md-autocomplete {
     width: 300px;
 }
+
+md-card {   
+ background-color: lightblue;
+}
+
+md-card-content {
+ background-color: lightblue;
+}

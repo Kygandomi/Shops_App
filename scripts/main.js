@@ -1,8 +1,21 @@
 var app = angular.module('StarterApp', ['ngMaterial']);
 
-app.controller('AppController', function ($mdSidenav) {
+app.controller('AppController', function ($scope, $mdSidenav) {
     'use strict';
     var vm = this;
+    
+    vm.lat = 123;
+    vm.lng = 234;
+    this.getLatLng = function(){
+        vm.lat = 'calculating...';
+        navigator.geolocation.getCurrentPosition(function(pos){
+            alert('ok', pos);
+            console.log(pos);
+            vm.lat = pos.coords.latitude;
+            vm.lng = pos.coords.longitude;
+            $scope.$apply();
+        });
+    };
 
     this.shoptypes = [
         {display: 'Closed'},
