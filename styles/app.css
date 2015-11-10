@@ -16,10 +16,12 @@ md-autocomplete {
     width: 300px;
 }
 
-md-card {   
- background-color: lightblue;
+md-card {
+ margin: auto;    
+ height: 80%;
+ width: 70%;  
 }
 
 md-card-content {
- background-color: lightblue;
+ background-color: lightgray;
 }
