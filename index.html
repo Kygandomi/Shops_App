@@ -5,6 +5,8 @@
     <meta name="viewport" content="initial-scale=1" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.css">
     <!-- Angular Material Dependencies -->
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
@@ -28,24 +30,25 @@
 
         <div ng-cloak>
             <md-content>
-                <md-tabs md-dynamic-height md-border-bottom>
+<!--            Latitude/Longitude Text Boxes and GPS/Submit Buttons-->
+                <div class='md-padding' layout="row" flex>
+                    <div style="margin: auto">
+                        <input id="focusedInput" type="text" placeholder="Input Latitude" ng-model="vm.lat" />
+                        <input id="focusedInput" type="text" placeholder="Input Longitude" ng-model="vm.lng" />
+                        <md-button ng-click="vm.getLatLng()" class="md-raised md-primary">
+                            GPS
+                            <!--fetch coordinates HERE-->
+                        </md-button>
+                        <md-button class="md-raised md-primary">
+                            Submit
+                        </md-button>
+                    </div>    
+                </div>
+                <md-tabs md-dynamic-height md-border-bottom md-swipe-content>
 <!--                Tab One Content-->
-                    <md-tab label="Store Search">
+                    <md-tab label="Suggestion 1">
                         <md-content>
-<!--                        Latitude/Longitude Text Boxes and GPS/Submit Buttons-->
-                            <div class='md-padding' layout="row" flex>
-                                <div style="margin: auto">
-                                    <input id="focusedInput" type="text" placeholder="Input Latitude" ng-model="vm.lat" />
-                                    <input id="focusedInput" type="text" placeholder="Input Longitude" ng-model="vm.lng" />
-                                    <md-button ng-click="vm.getLatLng()" class="md-raised md-primary">
-                                        GPS
-                                        <!--fetch coordinates HERE-->
-                                    </md-button>
-                                    <md-button class="md-raised md-primary">
-                                        Submit
-                                    </md-button>
-                                </div>    
-                            </div>
+
                             
 <!--                        Card Starts Here-->
                             <md-card>
@@ -139,6 +142,7 @@
                                         </div>
                                     
 <!--                                    Previous/Next Buttons-->
+<!--
                                         <div layout="row" flex>
                                             <div style ="margin: auto">
                                                 <md-button class="md-raised md-primary">
@@ -149,6 +153,7 @@
                                                 </md-button>
                                             </div>
                                         </div>
+-->
                                     </md-card-content>
                                 </md-card>
                             </md-content>
@@ -156,16 +161,230 @@
 
 
 <!--                    Tab Two Content-->
-                        <md-tab label="two">
-                            <md-content class="md-padding">
-                                <h1 class="md-display-2">Tab Two</h1>
+                    <md-tab label="Suggestion 2">
+                        <md-content>
+
+                            
+<!--                        Card Starts Here-->
+                            <md-card>
+                                <md-card-content>    
+<!--                                Image goes here-->
+                                    <div class='md-padding' layout="row" flex>
+                                        <div style="margin: auto">
+                                            <img src="assets/large2.jpg">
+                                        </div>    
+                                    </div>
+
+
+<!--                                    Take Picture/ Upload Picture Buttons-->
+                                        <div layout="row" flex>
+                                            <div style ="margin: auto">
+                                                <md-button class="md-raised md-primary">
+                                                    Choose Picture
+                                                </md-button>
+                                                <md-button class="md-raised md-primary">
+                                                    Upload Picture
+                                                </md-button>
+                                            </div>
+                                        </div>
+
+<!--                                    Insert Shop Name-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                <input id="focusedInput" type="text" placeholder="Input shop name" size="35"/>
+                                            </div>
+                                        </div>  
+
+<!--                                   Insert Shop Address-->
+                                       <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                <input id="focusedInput" type="text" placeholder="Input shop address" size="35"/>
+                                            </div>
+                                        </div>   
+
+<!--                                    Insert Ethnicity of Ownership-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                <input id="focusedInput" type="text" placeholder="Input ethnicity of ownership" size="35"/>
+                                            </div>
+                                        </div>  
+                                    
+<!--                                    Select Shop Type-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                Select shop type
+                                                <md-radio-group>
+                                                    <md-radio-button value="Tourist">Tourist</md-radio-button>
+                                                    <md-radio-button value="Resident">Resident</md-radio-button>
+                                                    <md-radio-button value="Mixed">Mixed</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>    
+
+<!--                                    Plateatici Y/N-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                Plateatici
+                                                <md-radio-group>
+                                                    <md-radio-button value="Yes">Yes</md-radio-button>
+                                                    <md-radio-button value="No">No</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>    
+
+<!--                                    Goods Sold Autocomplete DropDown-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin:auto">
+                                                <md-content class="md-padding">
+                                                    <form ng-submit="$event.preventDefault()">
+                                                        <md-autocomplete
+                                                          md-selected-item="vm.selectedItem"
+                                                          md-search-text-change="vm.searchTextChange(vm.searchText)"
+                                                          md-search-text="vm.searchText"
+                                                          md-selected-item-change="vm.selectedItemChange(item)"
+                                                          md-items="item in vm.shoptypes | filter:vm.searchText"
+                                                          md-item-text="item.display"
+                                                          md-min-length="0"
+                                                          placeholder="Enter Shop Type">
+                                                            <md-item-template>
+                                                                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}
+                                                                </span>
+                                                            </md-item-template>
+                                                        </md-autocomplete>
+                                                    </form>
+                                                </md-content>
+                                            </div>    
+                                        </div>
+                                    
+<!--                                    Previous/Next Buttons-->
+<!--
+                                        <div layout="row" flex>
+                                            <div style ="margin: auto">
+                                                <md-button class="md-raised md-primary">
+                                                    Previous
+                                                </md-button>
+                                                <md-button class="md-raised md-primary">
+                                                    Next
+                                                </md-button>
+                                            </div>
+                                        </div>
+-->
+                                    </md-card-content>
+                                </md-card>
                             </md-content>
                         </md-tab>
 
 <!--                    Tab Three Content-->
-                        <md-tab label="three">
-                            <md-content class="md-padding">
-                                <h1 class="md-display-2">Tab Three</h1>
+                    <md-tab label="Suggestion 3">
+                        <md-content>
+
+                            
+<!--                        Card Starts Here-->
+                            <md-card>
+                                <md-card-content>    
+<!--                                Image goes here-->
+                                    <div class='md-padding' layout="row" flex>
+                                        <div style="margin: auto">
+                                            <img src="assets/large.jpg">
+                                        </div>    
+                                    </div>
+
+
+<!--                                    Take Picture/ Upload Picture Buttons-->
+                                        <div layout="row" flex>
+                                            <div style ="margin: auto">
+                                                <md-button class="md-raised md-primary">
+                                                    Choose Picture
+                                                </md-button>
+                                                <md-button class="md-raised md-primary">
+                                                    Upload Picture
+                                                </md-button>
+                                            </div>
+                                        </div>
+
+<!--                                    Insert Shop Name-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                <input id="focusedInput" type="text" placeholder="Input shop name" size="35"/>
+                                            </div>
+                                        </div>  
+
+<!--                                   Insert Shop Address-->
+                                       <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                <input id="focusedInput" type="text" placeholder="Input shop address" size="35"/>
+                                            </div>
+                                        </div>   
+
+<!--                                    Insert Ethnicity of Ownership-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                <input id="focusedInput" type="text" placeholder="Input ethnicity of ownership" size="35"/>
+                                            </div>
+                                        </div>  
+                                    
+<!--                                    Select Shop Type-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                Select shop type
+                                                <md-radio-group>
+                                                    <md-radio-button value="Tourist">Tourist</md-radio-button>
+                                                    <md-radio-button value="Resident">Resident</md-radio-button>
+                                                    <md-radio-button value="Mixed">Mixed</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>    
+
+<!--                                    Plateatici Y/N-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin: auto">
+                                                Plateatici
+                                                <md-radio-group>
+                                                    <md-radio-button value="Yes">Yes</md-radio-button>
+                                                    <md-radio-button value="No">No</md-radio-button>
+                                                </md-radio-group>
+                                            </div>
+                                        </div>    
+
+<!--                                    Goods Sold Autocomplete DropDown-->
+                                        <div class='md-padding' layout="row" flex>
+                                            <div style="margin:auto">
+                                                <md-content class="md-padding">
+                                                    <form ng-submit="$event.preventDefault()">
+                                                        <md-autocomplete
+                                                          md-selected-item="vm.selectedItem"
+                                                          md-search-text-change="vm.searchTextChange(vm.searchText)"
+                                                          md-search-text="vm.searchText"
+                                                          md-selected-item-change="vm.selectedItemChange(item)"
+                                                          md-items="item in vm.shoptypes | filter:vm.searchText"
+                                                          md-item-text="item.display"
+                                                          md-min-length="0"
+                                                          placeholder="Enter Shop Type">
+                                                            <md-item-template>
+                                                                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}
+                                                                </span>
+                                                            </md-item-template>
+                                                        </md-autocomplete>
+                                                    </form>
+                                                </md-content>
+                                            </div>    
+                                        </div>
+                                    
+<!--                                    Previous/Next Buttons-->
+<!--
+                                        <div layout="row" flex>
+                                            <div style ="margin: auto">
+                                                <md-button class="md-raised md-primary">
+                                                    Previous
+                                                </md-button>
+                                                <md-button class="md-raised md-primary">
+                                                    Next
+                                                </md-button>
+                                            </div>
+                                        </div>
+-->
+                                    </md-card-content>
+                                </md-card>
                             </md-content>
                         </md-tab>
                     </md-tabs>     

@@ -4,6 +4,11 @@ app.controller('AppController', function ($scope, $mdSidenav) {
     'use strict';
     var vm = this;
     
+    var myDataRef = new Firebase('https://popping-fire-7452.firebaseio.com/');
+    myDataRef.on("value", function(snapshot){
+        console.log(snapshot.val());
+    });
+    
     vm.lat = 123;
     vm.lng = 234;
     this.getLatLng = function(){
@@ -15,6 +20,14 @@ app.controller('AppController', function ($scope, $mdSidenav) {
             vm.lng = pos.coords.longitude;
             $scope.$apply();
         });
+    };
+    
+    $scope.onSwipeLeft = function(ev) {
+        alert("nicememe!");
+    };
+    
+    $scope.onSwipeRight = function(ev) {
+        alert("nicememe(right)!");
     };
 
     this.shoptypes = [
